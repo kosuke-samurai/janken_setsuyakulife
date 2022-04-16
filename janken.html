@@ -53,8 +53,8 @@
 
     <section class="section">
       <h2>家計簿</h2>
-      <p class="attention">※ご利用は計画的に。赤字になりそうなら裏側で勝率いじってうまいことやってください。</p>
-
+      <p class="attention">※ご利用は計画的に。<span
+          class="torikesisen">赤字になりそうなら裏側で勝率いじってうまいことやってください。</span><br>【NEW】赤字になりそうな場合も安心に利用できる「安心モード」を追加しました。</p>
 
       <form id="kakeibo">
         <dl class="kakeibou">
@@ -73,9 +73,26 @@
         <p>使ったであろうお金：<span id="scoreBoard"> </span>円</p>
         <p>残高：<span id="zankin" class="special"> </span>円</p>
         <p id="attention2"></p>
-
       </div>
+
+      <dl class="newfunction">
+        <dt>安心モードに切り替えますか？</dt>
+        <dd class="modeselect1">
+          <form name="form">
+            <ul>
+              <li class="modeselect">
+                <label for=""><input type="radio" name="sefemode" value="sefety">セーフティーver.</label>
+              </li>
+              <li class="modeselect">
+                <label for=""><input type="radio" name="sefemode" value="stop">強制節約ver.</label>
+              </li>
+            </ul>
+          </form>
+        </dd>
+      </dl>
     </section>
+
+
 
   </main>
 
@@ -100,9 +117,15 @@
       const max = 2;
       const randomNumber8 = Math.floor(Math.random() * (max - min + 1)) + min;
       console.log(count)
+      const selectdata = $("input[name='sefemode']:checked").val();
 
-
-      if (randomNumber8 === 0) {
+      if (selectdata == "sefety") {
+        $("#com_hand").text("相手の手：パー");
+        $("#result").text("結果：あなたの負け…");
+        $("#money").text("今日使えるお金：500円");
+        $("#your_money").text("500円");
+        count["pc"]++;
+      } else if (randomNumber8 === 0) {
         $("#com_hand").text("相手の手：グー");
         $("#result").text("結果：あいこ");
         $("#money").text("今日使えるお金：5,000円");
@@ -152,8 +175,15 @@
       const max = 2;
       const randomNumber8 = Math.floor(Math.random() * (max - min + 1)) + min;
       console.log(count)
+      const selectdata = $("input[name='sefemode']:checked").val();
 
-      if (randomNumber8 === 0) {
+      if (selectdata == "sefety") {
+        $("#com_hand").text("相手の手：グー");
+        $("#result").text("結果：あなたの負け…");
+        $("#money").text("今日使えるお金：500円");
+        $("#your_money").text("500円");
+        count["pc"]++;
+      } else if (randomNumber8 === 0) {
         $("#com_hand").text("相手の手：グー");
         $("#result").text("結果：あなたの負け…");
         $("#money").text("今日使えるお金：500円");
@@ -200,8 +230,15 @@
       const max = 2;
       const randomNumber8 = Math.floor(Math.random() * (max - min + 1)) + min;
       console.log(count)
+      const selectdata = $("input[name='sefemode']:checked").val();
 
-      if (randomNumber8 === 0) {
+      if (selectdata == "sefety") {
+        $("#com_hand").text("相手の手：チョキ");
+        $("#result").text("結果：あなたの負け…");
+        $("#money").text("今日使えるお金：500円");
+        $("#your_money").text("500円");
+        count["pc"]++;
+      } else if (randomNumber8 === 0) {
         $("#com_hand").text("相手の手：グー");
         $("#result").text("結果：あなたの勝ち!!");
         $("#money").text("今日使えるお金：10,000円");
@@ -323,6 +360,29 @@
 
     })
 
+    //*ラジオボタンの調整*//
+    $(function () {
+
+      var inputs = $('input');
+      var checked = inputs.filter(':checked').val();
+
+      inputs.on('click', function () {
+
+        if ($(this).val() === checked) {
+          $(this).prop('checked', false);
+
+          checked = '';
+
+        } else {
+
+          $(this).prop('checked', true);
+
+          checked = $(this).val();
+
+        }
+      });
+
+    });
 
 
 

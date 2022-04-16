@@ -35,7 +35,6 @@ p{
 }
 ul{
     padding: 0;
-    border-top: 1px solid #000000;
     display:table;  /* 定義 */
     table-layout: fixed;
     width:100%;
@@ -70,10 +69,21 @@ button{
     font-weight: bold;
 }
 
-.kakeibou{
+.kakeibou,.newfunction{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+
+.modeselect1{
+    width: 300px;
+}
+.modeselect{
+    display: table-row;
+    width: 300px;
+    border: 0px;
+    text-align: left;
 }
 
 .usefull{
@@ -98,4 +108,8 @@ button{
 .attention{
     font-size: 20px;
     margin: 0 0 60px;
+}
+
+.torikesisen{
+    text-decoration: line-through;
 }
