@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/sample.css">
+  <title>じゃんけん</title>
+</head>
+
+<body>
+  <div class="title">
+    <h1>明るく倹約、楽しい生活</h1>
+    <p class="special">あなたの今日の行動を決めます。</p>
+  </div>
+
+  <main>
+
+    <section class="section">
+      <h2>【STEP1】使えるお金を決める</h2>
+      <p>じゃんけんで使えるお金を決めます。あなたの手を選んでください。</p>
+
+      <div class="pleyresult">
+        <ul>
+          <li id="gu_btn"><img src="img/janken_gu2.png" alt=""> </li>
+          <li id="cho_btn"><img src="img/janken_choki2.png" alt=""></li>
+          <li id="par_btn"><img src="img/janken_pa2.png" alt=""></li>
+        </ul>
+
+        <div class="janken_wrapper">
+          <div id="com_hand">コンピュータの出した手は？</div>
+          <div id="result">結果は？</div>
+          <div id="money">今日使えるお金は？</div>
+        </div>
+      </div>
+
+      <p>
+        <span id="your_money" class="special">今日使えるお金</span>でできる、今日の行動を決めます。
+      </p>
+
+    </section>
+
+    <section class="section">
+
+      <h2>【STEP2】今日のあなたの1日を決める</h2>
+
+      <button id="pull"><img src="img/button_start3.png" alt=""></button>
+
+      <p>今日のあなたの1日は…<span id="echo" class="special"> </span></p>
+      <p id="suggest_plan" class="suggest_plan"></p>
+
+    </section>
+
+    <section class="section">
+      <h2>家計簿</h2>
+      <p class="attention">※ご利用は計画的に。赤字になりそうなら裏側で勝率いじってうまいことやってください。</p>
+
+
+      <form id="kakeibo">
+        <dl class="kakeibou">
+          <dt>今月の予算を記入してください</dt>
+          <dd>
+            <input type="text" id="useful" class="usefull" inputmode="numeric" pattern="\d*" name="input_value"
+              value="">円
+          </dd>
+        </dl>
+
+      </form>
+
+      <div class="kakeibo_wrapper">
+        <h3>おさいふ</h3>
+        <p>今月の予算：<span id="input_value_box"> </span>円</p>
+        <p>使ったであろうお金：<span id="scoreBoard"> </span>円</p>
+        <p>残高：<span id="zankin" class="special"> </span>円</p>
+        <p id="attention2"></p>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>©たかはし、いらすとや、ぱくたそ</footer>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    //*ここに処理を追加//
+
+    //*勝敗、使用金額のカウント用//
+    const count = {
+      pc: 0,
+      me: 0,
+      even: 0,
+    };
+
+
+    //*じゃんけん//
+    $("#gu_btn").on("click", function () {
+      const min = 0;
+      const max = 2;
+      const randomNumber8 = Math.floor(Math.random() * (max - min + 1)) + min;
+      console.log(count)
+
+
+      if (randomNumber8 === 0) {
+        $("#com_hand").text("相手の手：グー");
+        $("#result").text("結果：あいこ");
+        $("#money").text("今日使えるお金：5,000円");
+        $("#your_money").text("5,000円");
+        count["even"]++;
+
+      } else if (randomNumber8 === 1) {
+        $("#com_hand").text("相手の手：チョキ");
+        $("#result").text("結果：あなたの勝ち!!");
+        $("#money").text("今日使えるお金：10,000円");
+        $("#your_money").text("10,000円");
+        count["me"]++;
+
+      } else if (randomNumber8 === 2) {
+        $("#com_hand").text("相手の手：パー");
+        $("#result").text("結果：あなたの負け…");
+        $("#money").text("今日使えるお金：500円");
+        $("#your_money").text("500円");
+        count["pc"]++;
+      }
+      document.querySelector("#scoreBoard").innerHTML = (count["pc"] * 500) + (count["me"] * 10000) + (count["even"] * 5000);
+
+      const kyuryo = $("#useful").val(); // val()でフォームのvalueを取得(数値)
+      let asobi = (count["pc"] * 500) + (count["me"] * 10000) + (count["even"] * 5000);
+      const fee = (kyuryo - asobi);
+      $("#zankin").html(fee);
+      if (fee <= 0) {
+        $("#zankin").css("color", "red");
+        $("#attention2").text("破産しました。");
+        $("#attention2").css("color", "red");
+        $("#attention2").css("font-weight", "bold");
+      } else if (fee <= 1000) {
+        $("#zankin").css("color", "orange");
+        $("#attention2").text("まもなく破産します。");
+        $("#attention2").css("color", "orange");
+        $("#attention2").css("font-weight", "bold");
+      } else {
+        $("#zankin").css("color", "black");
+        $("#attention2").text("");
+      }
+
+    }
+    )
+
+    $("#cho_btn").on("click", function () {
+      const min = 0;
+      const max = 2;
+      const randomNumber8 = Math.floor(Math.random() * (max - min + 1)) + min;
+      console.log(count)
+
+      if (randomNumber8 === 0) {
+        $("#com_hand").text("相手の手：グー");
+        $("#result").text("結果：あなたの負け…");
+        $("#money").text("今日使えるお金：500円");
+        $("#your_money").text("500円");
+        count["pc"]++;
+      } else if (randomNumber8 === 1) {
+        $("#com_hand").text("相手の手：チョキ");
+        $("#result").text("結果：あいこ");
+        $("#money").text("今日使えるお金：5,000円");
+        $("#your_money").text("5,000円");
+        count["even"]++;
+      } else if (randomNumber8 === 2) {
+        $("#com_hand").text("相手の手：パー");
+        $("#result").text("結果：あなたの勝ち!!");
+        $("#money").text("今日使えるお金：10,000円");
+        $("#your_money").text("10,000円");
+        count["me"]++;
+      }
+      document.querySelector("#scoreBoard").innerHTML = (count["pc"] * 500) + (count["me"] * 10000) + (count["even"] * 5000);
+
+      const kyuryo = $("#useful").val(); // val()でフォームのvalueを取得(数値)
+      let asobi = (count["pc"] * 500) + (count["me"] * 10000) + (count["even"] * 5000);
+      const fee = (kyuryo - asobi);
+      $("#zankin").html(fee);
+      if (fee <= 0) {
+        $("#zankin").css("color", "red");
+        $("#attention2").text("破産しました。");
+        $("#attention2").css("color", "red");
+        $("#attention2").css("font-weight", "bold");
+      } else if (fee <= 1000) {
+        $("#zankin").css("color", "orange");
+        $("#attention2").text("まもなく破産します。");
+        $("#attention2").css("color", "orange");
+        $("#attention2").css("font-weight", "bold");
+      } else {
+        $("#zankin").css("color", "black");
+        $("#attention2").text("");
+      }
+    }
+    )
+
+    $("#par_btn").on("click", function () {
+      const min = 0;
+      const max = 2;
+      const randomNumber8 = Math.floor(Math.random() * (max - min + 1)) + min;
+      console.log(count)
+
+      if (randomNumber8 === 0) {
+        $("#com_hand").text("相手の手：グー");
+        $("#result").text("結果：あなたの勝ち!!");
+        $("#money").text("今日使えるお金：10,000円");
+        $("#your_money").text("10,000円");
+        count["me"]++;
+      } else if (randomNumber8 === 1) {
+        $("#com_hand").text("相手の手：チョキ");
+        $("#result").text("結果：あなたの負け…");
+        $("#money").text("今日使えるお金：500円");
+        $("#your_money").text("500円");
+        count["pc"]++;
+      } else if (randomNumber8 === 2) {
+        $("#com_hand").text("相手の手：パー");
+        $("#result").text("結果：あいこ");
+        $("#money").text("今日使えるお金：5,000円");
+        $("#your_money").text("5,000円");
+        count["even"]++;
+      }
+      document.querySelector("#scoreBoard").innerHTML = (count["pc"] * 500) + (count["me"] * 10000) + (count["even"] * 5000);
+
+      const kyuryo = $("#useful").val(); // val()でフォームのvalueを取得(数値)
+      let asobi = (count["pc"] * 500) + (count["me"] * 10000) + (count["even"] * 5000);
+      const fee = (kyuryo - asobi);
+      $("#zankin").html(fee);
+      if (fee <= 0) {
+        $("#zankin").css("color", "red");
+        $("#attention2").text("破産しました。");
+        $("#attention2").css("color", "red");
+        $("#attention2").css("font-weight", "bold");
+      } else if (fee <= 1000) {
+        $("#zankin").css("color", "orange");
+        $("#attention2").text("まもなく破産します。");
+        $("#attention2").css("color", "orange");
+        $("#attention2").css("font-weight", "bold");
+      } else {
+        $("#zankin").css("color", "black");
+        $("#attention2").text("");
+      }
+    }
+    )
+
+    //*おみくじ//
+
+    $("#pull").on("click", function () {
+      const min = 0;
+      const max = 9;
+      const randomNumber9 = Math.floor(Math.random() * (max - min + 1)) + min;
+      const wemoney = document.getElementById("your_money");
+
+
+      if (randomNumber9 === 0 && wemoney.textContent === "10,000円") {
+        $("#echo").text("ハウステンボスに行ってください");
+        $("#suggest_plan").html('<a href="https://www.bushikaku.net/search/fukuoka_nagasaki/_huistenbosch/" class="menu1_link">ハウステンボスへの格安交通手段</a>');
+      } else if (randomNumber9 === 1 && wemoney.textContent === "10,000円") {
+        $("#echo").text("ユニバまで行っちゃおう");
+        $("#suggest_plan").html('<a href="https://www.bushikaku.net/search/fukuoka_osaka/_usj/" class="menu1_link">ユニバへの格安交通手段</a>');
+      } else if (randomNumber9 === 2 && wemoney.textContent === "10,000円") {
+        $("#echo").text("温泉に入ろう");
+        $("#suggest_plan").html('<a href="https://onsen.nifty.com/ft-cheap/fukuoka/" class="menu1_link">福岡周辺の安い温泉</a>');
+
+      } else if (randomNumber9 === 3 && (wemoney.textContent === "10,000円" || wemoney.textContent === "5,000円")) {
+        $("#echo").text("急いで準備してキャンプ行ってください");
+        $("#suggest_plan").html('<a href="https://tenki.jp/leisure/camp/9/47/23175/3hours.html" class="menu1_link">キャンプ場周辺の天気</a>');
+      } else if (randomNumber9 === 4 && (wemoney.textContent === "10,000円" || wemoney.textContent === "5,000円")) {
+        $("#echo").text("久しぶりに釣りをしよう");
+        $("#suggest_plan").html('<a href="https://anglers.jp/areas/3474" class="menu1_link">糸島の釣果情報</a>');
+      } else if (randomNumber9 === 5 && (wemoney.textContent === "10,000円" || wemoney.textContent === "5,000円")) {
+        $("#echo").text("美味しいものを食べてください");
+        $("#suggest_plan").html('<a href="https://www.tnc.co.jp/tenjinnow/back-number/" class="menu1_link">最近TVで紹介されていたお店一覧</a>');
+      } else if (randomNumber9 === 6 && (wemoney.textContent === "10,000円" || wemoney.textContent === "5,000円")) {
+        $("#echo").text("安居酒屋で楽しい夜を");
+        $("#suggest_plan").html('<a href="https://twitter.com/hashtag/%E5%A4%A9%E7%A5%9E%E3%82%B0%E3%83%AB%E3%83%A1" class="menu1_link">「#天神グルメ」調べる</a>');
+      } else if (randomNumber9 === 7) {
+        $("#echo").text("近所のゴミ拾い");
+        $("#suggest_plan").html('<a href="https://www.google.co.jp/maps/@33.7084416,130.4297472,14z?hl=ja" class="menu1_link">周辺の地図</a>');
+      } else if (randomNumber9 === 8) {
+        $("#echo").text("家でダラダラする");
+        $("#suggest_plan").html('<a href="https://top10.netflix.com/" class="menu1_link">Netflix最近の人気作品一覧</a>');
+      } else if (randomNumber9 === 9) {
+        $("#echo").text("家にある本を読む");
+        $("#suggest_plan").html('<a href="https://www.sofastyle.jp/media/chooseuse/63117" class="menu1_link">疲れない読書姿勢</a>');
+      } else {
+        $("#echo").text("散歩。野に咲く花を探す");
+        $("#suggest_plan").html('<a href="https://www.tou-memo.com/entry/2020/04/24/080108" class="menu1_link">住宅街で楽しめる花の図鑑</a>');
+      }
+    }
+    )
+
+    //*家計簿//
+
+    const salary = document.forms.kakeibo.input_value;
+
+    salary.addEventListener("input", () => {
+      let inputValueBox = document.getElementById('input_value_box');
+      inputValueBox.textContent = salary.value;
+    })
+
+    $(function () {
+      $("#useful").on("input", function () {
+        const kyuryo = $("#useful").val(); // val()でフォームのvalueを取得(数値)
+        let asobi = (count["pc"] * 500) + (count["me"] * 10000) + (count["even"] * 5000);
+        const fee = (kyuryo - asobi);
+        $("#zankin").html(fee);
+        if (fee <= 0) {
+          $("#zankin").css("color", "red");
+          $("#attention2").text("破産しました。");
+          $("#attention2").css("color", "red");
+          $("#attention2").css("font-weight", "bold");
+        } else if (fee <= 1000) {
+          $("#zankin").css("color", "orange");
+          $("#attention2").text("まもなく破産します。");
+          $("#attention2").css("color", "orange");
+          $("#attention2").css("font-weight", "bold");
+        } else {
+          $("#zankin").css("color", "black");
+          $("#attention2").text("");
+        }
+      })
+
+    })
+
+
+
+
+  </script>
+
+
+</body>
+
+</html>
