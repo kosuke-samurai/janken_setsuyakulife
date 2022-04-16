@@ -32,6 +32,8 @@
           <div id="result">結果は？</div>
           <div id="money">今日使えるお金は？</div>
         </div>
+        <p class="janken_wrapper">勝ち数：<span id="win"></span>　負け数：<span id="lose"></span>　あいこ数：<span
+            id="aiko"></span>　勝負した回数：<span id="playcount"></span>　勝率：<span id="rate"></span>%</p>
       </div>
 
       <p>
@@ -121,6 +123,7 @@
       console.log(count)
       const selectdata = $("input[name='sefemode']:checked").val();
 
+
       if (selectdata == "stop") {
         $("#com_hand").text("強制節約ver.発動中");
         $("#com_hand").css("color", "red");
@@ -174,6 +177,11 @@
         $("#nomal").css("display", "inline")
         count["pc"]++;
       }
+      document.querySelector("#win").innerHTML = count["me"];
+      document.querySelector("#lose").innerHTML = count["pc"];
+      document.querySelector("#aiko").innerHTML = count["even"];
+      document.querySelector("#playcount").innerHTML = count["even"] + count["me"] + count["pc"];
+      document.querySelector("#rate").innerHTML = Math.round((count["me"] / (count["even"] + count["me"] + count["pc"])) * 100);
       document.querySelector("#scoreBoard").innerHTML = (count["pc"] * 500) + (count["me"] * 10000) + (count["even"] * 5000);
 
       const kyuryo = $("#useful").val(); // val()でフォームのvalueを取得(数値)
@@ -251,6 +259,11 @@
         $("#nomal").css("display", "inline")
         count["me"]++;
       }
+      document.querySelector("#win").innerHTML = count["me"];
+      document.querySelector("#lose").innerHTML = count["pc"];
+      document.querySelector("#aiko").innerHTML = count["even"];
+      document.querySelector("#playcount").innerHTML = count["even"] + count["me"] + count["pc"];
+      document.querySelector("#rate").innerHTML = Math.round((count["me"] / (count["even"] + count["me"] + count["pc"])) * 100);
       document.querySelector("#scoreBoard").innerHTML = (count["pc"] * 500) + (count["me"] * 10000) + (count["even"] * 5000);
 
       const kyuryo = $("#useful").val(); // val()でフォームのvalueを取得(数値)
@@ -331,6 +344,11 @@
         $("#nomal").css("display", "inline")
         count["even"]++;
       }
+      document.querySelector("#win").innerHTML = count["me"];
+      document.querySelector("#lose").innerHTML = count["pc"];
+      document.querySelector("#aiko").innerHTML = count["even"];
+      document.querySelector("#playcount").innerHTML = count["even"] + count["me"] + count["pc"];
+      document.querySelector("#rate").innerHTML = Math.round((count["me"] / (count["even"] + count["me"] + count["pc"])) * 100);
       document.querySelector("#scoreBoard").innerHTML = (count["pc"] * 500) + (count["me"] * 10000) + (count["even"] * 5000);
 
       const kyuryo = $("#useful").val(); // val()でフォームのvalueを取得(数値)
