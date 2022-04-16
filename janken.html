@@ -43,12 +43,14 @@
     <section class="section">
 
       <h2>【STEP2】今日のあなたの1日を決める</h2>
+      <h3 id="finalalart" class="finalalart">使えるお金はありません。家でじっとしてろ！</h3>
 
-      <button id="pull"><img src="img/button_start3.png" alt=""></button>
+      <div id="nomal">
+        <button id="pull"><img src="img/button_start3.png" alt=""></button>
 
-      <p>今日のあなたの1日は…<span id="echo" class="special"> </span></p>
-      <p id="suggest_plan" class="suggest_plan"></p>
-
+        <p>今日のあなたの1日は…<span id="echo" class="special"> </span></p>
+        <p id="suggest_plan" class="suggest_plan"></p>
+      </div>
     </section>
 
     <section class="section">
@@ -119,17 +121,35 @@
       console.log(count)
       const selectdata = $("input[name='sefemode']:checked").val();
 
-      if (selectdata == "sefety") {
+      if (selectdata == "stop") {
+        $("#com_hand").text("強制節約ver.発動中");
+        $("#com_hand").css("color", "red");
+        $("#com_hand").css("font-weight", "bold");
+        $("#result").text("勝負はできません！");
+        $("#money").text("今日使えるお金：0円");
+        $("#your_money").text("0円");
+        $("#finalalart").css("display", "inline")
+        $("#nomal").css("display", "none")
+
+      } else if (selectdata == "sefety") {
         $("#com_hand").text("相手の手：パー");
         $("#result").text("結果：あなたの負け…");
         $("#money").text("今日使えるお金：500円");
         $("#your_money").text("500円");
+        $("#com_hand").css("color", "");
+        $("#com_hand").css("font-weight", "");
+        $("#finalalart").css("display", "none")
+        $("#nomal").css("display", "inline")
         count["pc"]++;
       } else if (randomNumber8 === 0) {
         $("#com_hand").text("相手の手：グー");
         $("#result").text("結果：あいこ");
         $("#money").text("今日使えるお金：5,000円");
         $("#your_money").text("5,000円");
+        $("#com_hand").css("color", "");
+        $("#com_hand").css("font-weight", "");
+        $("#finalalart").css("display", "none")
+        $("#nomal").css("display", "inline")
         count["even"]++;
 
       } else if (randomNumber8 === 1) {
@@ -137,6 +157,10 @@
         $("#result").text("結果：あなたの勝ち!!");
         $("#money").text("今日使えるお金：10,000円");
         $("#your_money").text("10,000円");
+        $("#com_hand").css("color", "");
+        $("#com_hand").css("font-weight", "");
+        $("#finalalart").css("display", "none")
+        $("#nomal").css("display", "inline")
         count["me"]++;
 
       } else if (randomNumber8 === 2) {
@@ -144,6 +168,10 @@
         $("#result").text("結果：あなたの負け…");
         $("#money").text("今日使えるお金：500円");
         $("#your_money").text("500円");
+        $("#com_hand").css("color", "");
+        $("#com_hand").css("font-weight", "");
+        $("#finalalart").css("display", "none")
+        $("#nomal").css("display", "inline")
         count["pc"]++;
       }
       document.querySelector("#scoreBoard").innerHTML = (count["pc"] * 500) + (count["me"] * 10000) + (count["even"] * 5000);
@@ -177,11 +205,24 @@
       console.log(count)
       const selectdata = $("input[name='sefemode']:checked").val();
 
-      if (selectdata == "sefety") {
+      if (selectdata == "stop") {
+        $("#com_hand").text("強制節約ver.発動中");
+        $("#com_hand").css("color", "red");
+        $("#com_hand").css("font-weight", "bold");
+        $("#result").text("勝負はできません！");
+        $("#money").text("今日使えるお金：0円");
+        $("#your_money").text("0円");
+        $("#finalalart").css("display", "inline")
+        $("#nomal").css("display", "none")
+      } else if (selectdata == "sefety") {
         $("#com_hand").text("相手の手：グー");
         $("#result").text("結果：あなたの負け…");
         $("#money").text("今日使えるお金：500円");
         $("#your_money").text("500円");
+        $("#com_hand").css("color", "");
+        $("#com_hand").css("font-weight", "");
+        $("#finalalart").css("display", "none")
+        $("#nomal").css("display", "inline")
         count["pc"]++;
       } else if (randomNumber8 === 0) {
         $("#com_hand").text("相手の手：グー");
@@ -194,12 +235,20 @@
         $("#result").text("結果：あいこ");
         $("#money").text("今日使えるお金：5,000円");
         $("#your_money").text("5,000円");
+        $("#com_hand").css("color", "");
+        $("#com_hand").css("font-weight", "");
+        $("#finalalart").css("display", "none")
+        $("#nomal").css("display", "inline")
         count["even"]++;
       } else if (randomNumber8 === 2) {
         $("#com_hand").text("相手の手：パー");
         $("#result").text("結果：あなたの勝ち!!");
         $("#money").text("今日使えるお金：10,000円");
         $("#your_money").text("10,000円");
+        $("#com_hand").css("color", "");
+        $("#com_hand").css("font-weight", "");
+        $("#finalalart").css("display", "none")
+        $("#nomal").css("display", "inline")
         count["me"]++;
       }
       document.querySelector("#scoreBoard").innerHTML = (count["pc"] * 500) + (count["me"] * 10000) + (count["even"] * 5000);
@@ -232,29 +281,54 @@
       console.log(count)
       const selectdata = $("input[name='sefemode']:checked").val();
 
-      if (selectdata == "sefety") {
+      if (selectdata == "stop") {
+        $("#com_hand").text("強制節約ver.発動中");
+        $("#com_hand").css("color", "red");
+        $("#com_hand").css("font-weight", "bold");
+        $("#result").text("勝負はできません！");
+        $("#money").text("今日使えるお金：0円");
+        $("#your_money").text("0円");
+        $("#finalalart").css("display", "inline")
+        $("#nomal").css("display", "none")
+      } else if (selectdata == "sefety") {
         $("#com_hand").text("相手の手：チョキ");
         $("#result").text("結果：あなたの負け…");
         $("#money").text("今日使えるお金：500円");
         $("#your_money").text("500円");
+        $("#com_hand").css("color", "");
+        $("#com_hand").css("font-weight", "");
+        $("#finalalart").css("display", "none")
+        $("#nomal").css("display", "inline")
         count["pc"]++;
       } else if (randomNumber8 === 0) {
         $("#com_hand").text("相手の手：グー");
         $("#result").text("結果：あなたの勝ち!!");
         $("#money").text("今日使えるお金：10,000円");
         $("#your_money").text("10,000円");
+        $("#com_hand").css("color", "");
+        $("#com_hand").css("font-weight", "");
+        $("#finalalart").css("display", "none")
+        $("#nomal").css("display", "inline")
         count["me"]++;
       } else if (randomNumber8 === 1) {
         $("#com_hand").text("相手の手：チョキ");
         $("#result").text("結果：あなたの負け…");
         $("#money").text("今日使えるお金：500円");
         $("#your_money").text("500円");
+        $("#com_hand").css("color", "");
+        $("#com_hand").css("font-weight", "");
+        $("#finalalart").css("display", "none")
+        $("#nomal").css("display", "inline")
         count["pc"]++;
       } else if (randomNumber8 === 2) {
         $("#com_hand").text("相手の手：パー");
         $("#result").text("結果：あいこ");
         $("#money").text("今日使えるお金：5,000円");
         $("#your_money").text("5,000円");
+        $("#com_hand").css("color", "");
+        $("#com_hand").css("font-weight", "");
+        $("#finalalart").css("display", "none")
+        $("#nomal").css("display", "inline")
         count["even"]++;
       }
       document.querySelector("#scoreBoard").innerHTML = (count["pc"] * 500) + (count["me"] * 10000) + (count["even"] * 5000);

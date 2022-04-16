@@ -113,3 +113,8 @@ button{
 .torikesisen{
     text-decoration: line-through;
 }
+
+.finalalart{
+    color: red;
+    display: none;
+}
