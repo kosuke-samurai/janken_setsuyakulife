@@ -9,15 +9,14 @@
 </head>
 
 <body>
-  <div class="title">
-    <h1>明るく倹約、楽しい生活</h1>
+
+  <header class="title" id="main-img">
+    <h1 class="title__article">明るく倹約、楽しい生活</h1>
     <p class="special">あなたの今日の行動を決めます。</p>
-  </div>
+  </header>
 
-  <div class="heat">
-  </div>
+  <div class="heat"></div>
   <main>
-
     <section class="section section2">
       <h2>【STEP1】使えるお金を決める</h2>
       <p>じゃんけんで使えるお金を決めます。あなたの手を選んでください。</p>
@@ -478,7 +477,23 @@
 
     });
 
+    /*背景*/
 
+    $(function () {
+      var bg1 = $('#main-img');
+      var bg2 = $('#bg');
+      var speed = 1000;
+      cloudMove();
+      setInterval(cloudMove, 2000);
+      function cloudMove() {
+        bg1
+          .animate({ backgroundPosition: '60px' }, speed)
+          .animate({ backgroundPosition: '0' }, speed);
+        bg2
+          .animate({ backgroundPosition: '120px' }, speed)
+          .animate({ backgroundPosition: '0' }, speed);
+      }
+    });
 
   </script>
 
