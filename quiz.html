@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="quiz.css">
+    <title>方言くいず</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <p id="questions">問題</p>
+        <div>
+            <button type="button">1</button>
+            <button type="button">2</button>
+            <button type="button">3</button>
+        </div>
+        <p id="result">結果</p>
+        <p id="finalresult"></p>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+
+        const quiz = [
+            {
+                question: "くらす",
+                select: ["方言", "方言じゃない", "どちらもある"],
+                correct: "どちらもある",
+
+            }, {
+                question: "つらたん",
+                select: ["方言", "方言じゃない", "どちらもある"],
+                correct: "方言じゃない",
+            }, {
+                question: "ぺらぺら",
+                select: ["方言", "方言じゃない", "どちらもある"],
+                correct: "方言じゃない",
+            }, {
+                question: "ほげる",
+                select: ["方言", "方言じゃない", "どちらもある"],
+                correct: "方言",
+            }, {
+                question: "なるほどですね",
+                select: ["方言", "方言じゃない", "どちらもある"],
+                correct: "方言",
+            }, {
+                question: "あざ",
+                select: ["方言", "方言じゃない", "どちらもある"],
+                correct: "方言じゃない",
+            }, {
+                question: "えげつな",
+                select: ["方言", "方言じゃない", "どちらもある"],
+                correct: "方言じゃない",
+            }, {
+                question: "どげんかせんと",
+                select: ["方言", "方言じゃない", "どちらもある"],
+                correct: "方言",
+            }, {
+                question: "せからしかけん",
+                select: ["方言", "方言じゃない", "どちらもある"],
+                correct: "方言",
+            }, {
+                question: "なおす",
+                select: ["方言", "方言じゃない", "どちらもある"],
+                correct: "どちらもある",
+            }
+
+        ];
+
+        let quizindex = 0;
+        const quizLenght = quiz.length;
+        let score = 0;
+
+
+        /*基礎*/
+
+        const $button = document.getElementsByTagName("button")
+        const buttonLenght = $button.length;
+
+        const Quizset = () => {
+            document.getElementById("questions").textContent = quiz[quizindex].question;
+
+            let buttoncount = 0;
+            while (buttoncount < buttonLenght) {
+                $button[buttoncount].textContent = quiz[quizindex].select[buttoncount];
+                buttoncount++;
+            }
+        }
+        Quizset();
+
+        const clickmove = (e) => {
+            if (quiz[quizindex].correct === e.target.textContent) {
+                $("#result").text("あたり！");
+                score++;
+            } else {
+                $("#result").text("はずれ‥");
+            }
+
+            quizindex++;
+            if (quizindex < quizLenght) {
+                Quizset();
+            } else {
+                $("#finalresult").text("すべて終わりました。あなたの正解数は" + score + "/" + quizindex + "でした。")
+            }
+        }
+
+        let moveindex = 0;
+        while (moveindex < buttonLenght) {
+            $button[moveindex].addEventListener("click", (e) => {
+                clickmove(e);
+            })
+            moveindex++;
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>

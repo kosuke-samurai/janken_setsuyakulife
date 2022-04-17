@@ -377,7 +377,7 @@
 
     $("#pull").on("click", function () {
       const min = 0;
-      const max = 9;
+      const max = 10;
       const randomNumber9 = Math.floor(Math.random() * (max - min + 1)) + min;
       const wemoney = document.getElementById("your_money");
 
@@ -413,9 +413,13 @@
       } else if (randomNumber9 === 9) {
         $("#echo").text("家にある本を読む");
         $("#suggest_plan").html('<a href="https://www.sofastyle.jp/media/chooseuse/63117" class="menu1_link">疲れない読書姿勢</a>');
-      } else {
+      } else if (randomNumber9 === 10) {
         $("#echo").text("散歩。野に咲く花を探す");
         $("#suggest_plan").html('<a href="https://www.tou-memo.com/entry/2020/04/24/080108" class="menu1_link">住宅街で楽しめる花の図鑑</a>');
+
+      } else {
+        $("#echo").text("クイズで遊びましょう");
+        $("#suggest_plan").html('<a href="quiz.html" class="menu1_link">自家製クイズ</a>');
       }
     }
     )
