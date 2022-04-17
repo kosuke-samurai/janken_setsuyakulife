@@ -4,67 +4,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="quiz.css">
+    <link rel="stylesheet" href="css/quiz.css">
     <title>方言くいず</title>
 </head>
 
 <body>
 
-    <div class="container">
-        <p id="questions">問題</p>
-        <div>
-            <button type="button">1</button>
-            <button type="button">2</button>
-            <button type="button">3</button>
-        </div>
-        <p id="result">結果</p>
-        <p id="finalresult"></p>
+    <header>
+        <h1>方言くいず</h1>
+        <p>方言か、方言じゃないか、当てましょう</p>
+    </header>
 
-    </div>
+    <div class="heat"></div>
+
+    <main>
+        <div class="container">
+            <h2>次の言葉は方言？(全10問)</h2>
+            <p id="questions" class="question"></p>
+            <div id="buttonwhole">
+                <button type="button" id="button1">1</button>
+                <button type="button" id="button1">2</button>
+                <button type="button" id="button1">3</button>
+            </div>
+            <p id="result">　</p>
+            <p><input type="button" id="nextq" value="次の問題に進む" class="nextq"></input></p>
+            <p id="finalresult"></p>
+
+        </div>
+    </main>
+
+    <footer>©たかはし、いらすとや</footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
 
+
+        $(function () {
+            $("#nextq").css("display", "none");
+        });
+
         const quiz = [
             {
-                question: "くらす",
+                question: "1問目：くらす",
                 select: ["方言", "方言じゃない", "どちらもある"],
                 correct: "どちらもある",
 
             }, {
-                question: "つらたん",
+                question: "2問目：つらたん",
                 select: ["方言", "方言じゃない", "どちらもある"],
                 correct: "方言じゃない",
             }, {
-                question: "ぺらぺら",
+                question: "3問目：ぺらぺら",
                 select: ["方言", "方言じゃない", "どちらもある"],
                 correct: "方言じゃない",
             }, {
-                question: "ほげる",
+                question: "4問目：ほげる",
                 select: ["方言", "方言じゃない", "どちらもある"],
                 correct: "方言",
             }, {
-                question: "なるほどですね",
+                question: "5問目：なるほどですね",
                 select: ["方言", "方言じゃない", "どちらもある"],
                 correct: "方言",
             }, {
-                question: "あざ",
+                question: "6問目：あざ",
                 select: ["方言", "方言じゃない", "どちらもある"],
                 correct: "方言じゃない",
             }, {
-                question: "えげつな",
+                question: "7問目：えげつな",
                 select: ["方言", "方言じゃない", "どちらもある"],
                 correct: "方言じゃない",
             }, {
-                question: "どげんかせんと",
+                question: "8問目：どげんかせんと",
                 select: ["方言", "方言じゃない", "どちらもある"],
                 correct: "方言",
             }, {
-                question: "せからしかけん",
+                question: "9問目：せからしかけん",
                 select: ["方言", "方言じゃない", "どちらもある"],
                 correct: "方言",
             }, {
-                question: "なおす",
+                question: "10問目：なおす",
                 select: ["方言", "方言じゃない", "どちらもある"],
                 correct: "どちらもある",
             }
@@ -77,6 +95,8 @@
 
 
         /*基礎*/
+
+
 
         const $button = document.getElementsByTagName("button")
         const buttonLenght = $button.length;
@@ -95,14 +115,18 @@
         const clickmove = (e) => {
             if (quiz[quizindex].correct === e.target.textContent) {
                 $("#result").text("あたり！");
+                $("#result").css("display", "inline");
+                $("#buttonwhole").css("display", "none");
                 score++;
             } else {
                 $("#result").text("はずれ‥");
+                $("#result").css("display", "inline");
+                $("#buttonwhole").css("display", "none");
             }
 
             quizindex++;
             if (quizindex < quizLenght) {
-                Quizset();
+                $("#nextq").show();
             } else {
                 $("#finalresult").text("すべて終わりました。あなたの正解数は" + score + "/" + quizindex + "でした。")
             }
@@ -115,6 +139,13 @@
             })
             moveindex++;
         }
+
+        $("#nextq").on("click", function () {
+            $("#buttonwhole").css("display", "inline");
+            $("#result").css("display", "none");
+            $("#nextq").hide();
+            Quizset();
+        });
 
 
 
