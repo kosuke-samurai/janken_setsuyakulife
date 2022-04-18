@@ -140,4 +140,11 @@ button{
     
 }
 
+.modesele{
+    transform: scale(1.5);
+    cursor: pointer;
+}
 
+.boy{
+    margin: 0 0 0 10px;
+}
